@@ -5,37 +5,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Login</title>
+    <title>Log In</title>
 </head>
 <body>
     <div class="container">
-        <h1>Login</h1>
-        <!-- Error message div -->
-        <div id="error-message" style="color: red; display: none;"></div>
-        <form action="#" method="post" onsubmit="return validateLogin()">
+        <h1>Log In</h1>
+        <div id="login-error-message" style="color: red; display: none;"></div>
+        <form id="login-form" onsubmit="return validateLogin(event)">
             <input type="text" name="username" placeholder="Username" required>
             <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Login</button>
+            <button type="submit">Log In</button>
         </form>
         <footer>
             <p>Don't have an account? <a href="signup.html" style="color: #66cccc;">Sign up</a></p>
         </footer>
     </div>
-    
+
     <script>
-        // Dummy validation function
-        function validateLogin() {
+        // Simulated user credentials (for demonstration purposes)
+        const users = [
+            { username: "user1", password: "password1" },
+            { username: "user2", password: "password2" },
+        ];
+
+        function validateLogin(event) {
+            event.preventDefault(); // Prevent form submission
+
             const username = document.querySelector('input[name="username"]').value;
             const password = document.querySelector('input[name="password"]').value;
-            const errorMessageDiv = document.getElementById('error-message');
+            const errorMessageDiv = document.getElementById('login-error-message');
 
-            // Replace this with actual validation logic
-            if (username !== "correctUsername" || password !== "correctPassword") {
-                errorMessageDiv.textContent = "Incorrect username or password.";
+            // Check if the username and password are correct
+            const user = users.find(user => user.username === username && user.password === password);
+
+            if (user) {
+                errorMessageDiv.style.display = "none"; // Hide error message
+                alert('Login successful!'); // Simulate successful login
+                // Here you can redirect to a dashboard page or perform further actions
+            } else {
+                errorMessageDiv.textContent = "Incorrect username or password. Please try again.";
                 errorMessageDiv.style.display = "block"; // Show the error message
-                return false; // Prevent form submission
             }
-            return true; // Allow form submission
         }
     </script>
 </body>

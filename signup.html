@@ -10,9 +10,8 @@
 <body>
     <div class="container">
         <h1>Sign Up</h1>
-        <!-- Error message div -->
         <div id="signup-error-message" style="color: red; display: none;"></div>
-        <form action="#" method="post" onsubmit="return validateSignup()">
+        <form id="signup-form" onsubmit="return validateSignup(event)">
             <input type="text" name="username" placeholder="Username" required>
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Password" required>
@@ -24,23 +23,33 @@
     </div>
     
     <script>
-        // Dummy validation function for demonstration
-        function validateSignup() {
+        // Simulated taken usernames and emails (for demonstration purposes)
+        const takenUsernames = ["takenUsername1", "takenUsername2", "admin"];
+        const takenEmails = ["taken@example.com", "user@example.com"];
+
+        function validateSignup(event) {
+            event.preventDefault(); // Prevent form submission
+
             const username = document.querySelector('input[name="username"]').value;
+            const email = document.querySelector('input[name="email"]').value;
             const errorMessageDiv = document.getElementById('signup-error-message');
 
-            // Simulated taken usernames (replace this with an actual backend check)
-            const takenUsernames = ["takenUsername1", "takenUsername2", "admin"];
+            // Reset error message
+            errorMessageDiv.style.display = "none"; 
+            errorMessageDiv.textContent = "";
 
             // Check if the entered username is in the list of taken usernames
             if (takenUsernames.includes(username)) {
-                errorMessageDiv.textContent = "Username is already taken. Please choose another one.";
+                errorMessageDiv.textContent = "Username is already taken. Please choose a different one.";
                 errorMessageDiv.style.display = "block"; // Show the error message
-                return false; // Prevent form submission
+            } else if (takenEmails.includes(email)) {
+                errorMessageDiv.textContent = "Email is already taken. Please choose a different one.";
+                errorMessageDiv.style.display = "block"; // Show the error message
+            } else {
+                errorMessageDiv.style.display = "none"; // Hide error message
+                alert('Signup successful!'); // Simulate successful signup
+                // Here you can redirect to a login page or perform further actions
             }
-
-            // Proceed with the signup process
-            return true; // Allow form submission
         }
     </script>
 </body>
