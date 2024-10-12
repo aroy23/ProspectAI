@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify
+from logins import *
 import os
 
 app = Flask(__name__, 
@@ -19,10 +20,22 @@ def allowed_file(filename):
 def home():
     return render_template("index.html")
 
+@app.route('/add_user')
+def add_user(username, email, password):
+    try:
+        db_add(username, email, password)
+    except sqlite3.IntegrityError as e:
+        if e == 'UNIQUE constraint failed: user_data.username':
+            return jsonify({'error': 'Username already in use!'})
+        elif e == 'UNIQUE constraint failed: user_data.email':
+            return jsonify({'error': 'Email already in use!'})
+
 @app.route('/login')
-def login():
-    # redirects back to the home screen
-    return jsonify({'message': 'Login placeholder, redirecting...'}), 302
+def login(username, password):
+    try:
+        return db_login(username, password)
+    except TypeError as e:
+        return jsonify({'error': 'Enter both email and password!'})
 
 @app.route('/upload', methods=['POST'])
 def upload():
