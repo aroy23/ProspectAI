@@ -26,25 +26,23 @@ def login():
 
 @app.route('/upload', methods=['POST'])
 def upload():
-    # Check if the 'file' part exists in the request
     if 'file' not in request.files:
         return jsonify({'error': 'No file part in the request'}), 400
 
     file = request.files['file']
 
-    # Check if no file was submitted
     if file.filename == '':
         return jsonify({'error': 'No selected file'}), 400
 
-    # Check if the file is of a valid extension
     if file and allowed_file(file.filename):
-        # Secure and save the file
         filename = file.filename
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
         return jsonify({'message': 'File uploaded successfully', 'filepath': filepath}), 200
 
     return jsonify({'error': 'File type not allowed'}), 400
+
+
 
 if __name__ == '__main__':
     # Create upload folder if it doesn't exist
