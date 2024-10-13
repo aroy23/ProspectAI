@@ -244,9 +244,9 @@
             <span class="close" onclick="closeEditPopup()">&times;</span>
             <h2>Edit Your Information</h2>
             <label for="editName">Name:</label>
-            <input type="text" id="editName" value="[John Doe]">
+            <input type="text" id="editName" value="[JohnDoe]">
             <label for="editSport">Sport:</label>
-            <input type="text" id="editSport" value="Soccer">
+            <input type="text" id="editSport" value="Basketball">
             <label for="editPlayerNumber">Player Number:</label>
             <input type="number" id="editPlayerNumber" value="20">
             <label for="editAge">Age:</label>
@@ -258,3 +258,111 @@
     </div>
 
     <!-- Profile Picture Upload Popup -->
+    <div id="profilePicturePopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closeProfilePicturePopup()">&times;</span>
+            <h2>Change Profile Picture</h2>
+            <input type="file" id="profilePictureInput" accept="image/*" onchange="previewProfilePicture(event)">
+            <div id="profilePicturePreview">
+                <img src="../static/images/default.png" alt="Profile Picture Preview" id="previewImg" />
+            </div>
+            <button onclick="uploadProfilePicture()">Upload Profile Picture</button>
+        </div>
+    </div>
+
+    <script>
+        function openEditPopup() {
+            document.getElementById('editPopup').style.display = 'flex';
+        }
+
+        function closeEditPopup() {
+            document.getElementById('editPopup').style.display = 'none';
+        }
+
+        function openProfilePicturePopup() {
+            document.getElementById('profilePicturePopup').style.display = 'flex';
+        }
+
+        function closeProfilePicturePopup() {
+            document.getElementById('profilePicturePopup').style.display = 'none';
+        }
+
+        function previewProfilePicture(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById('previewImg').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function uploadProfilePicture() {
+            const fileInput = document.getElementById('profilePictureInput');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('profilePicture').querySelector('img').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+                closeProfilePicturePopup();
+            } else {
+                alert('Please select an image file to upload.');
+            }
+        }
+
+        function saveChanges() {
+            const name = document.getElementById('editName').value;
+            const sport = document.getElementById('editSport').value;
+            const playerNumber = document.getElementById('editPlayerNumber').value;
+            const age = document.getElementById('editAge').value;
+            const grade = document.getElementById('editGrade').value;
+
+            document.getElementById('name').textContent = name;
+            document.getElementById('sport').textContent = sport;
+            document.getElementById('playerNumber').textContent = playerNumber;
+            document.getElementById('age').textContent = age;
+            document.getElementById('grade').textContent = grade;
+
+            closeEditPopup();
+        }
+
+        function showCollegeInfo() {
+            const collegeSelect = document.getElementById('collegeSelect');
+            const selectedCollege = collegeSelect.value;
+
+            if (selectedCollege) {
+                const collegeInfo = document.createElement('div');
+                collegeInfo.className = 'college-link';
+                collegeInfo.innerHTML = `<span class="college-name">${selectedCollege}</span>
+                <button onclick="removeCollege(this)">Remove</button>`;
+                document.getElementById('myColleges').appendChild(collegeInfo);
+            }
+        }
+
+        function addCollege() {
+            const collegeSelect = document.getElementById('collegeSelect');
+            const selectedCollege = collegeSelect.value;
+
+            if (selectedCollege) {
+                const collegeInfo = document.createElement('div');
+                collegeInfo.className = 'college-link';
+                collegeInfo.innerHTML = `<span class="college-name">${selectedCollege}</span>
+                <button onclick="removeCollege(this)">Remove</button>`;
+                document.getElementById('myColleges').appendChild(collegeInfo);
+
+                // Reset the dropdown selection
+                collegeSelect.selectedIndex = 0;
+            } else {
+                alert("Please select a college.");
+            }
+        }
+
+        function removeCollege(button) {
+            button.parentElement.remove();
+        }
+    </script>
+</body>
+
+</html>
