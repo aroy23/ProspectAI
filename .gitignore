@@ -10,3 +10,4 @@ output_videos/
 env
 aud
 vid
+backend/logins.db

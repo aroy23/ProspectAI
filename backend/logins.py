@@ -1,7 +1,7 @@
 import sqlite3
 
 def db_add(username:str, email:str, password: str):
-    conn = sqlite3.connect('backend/logins.db')
+    conn = sqlite3.connect('logins.db')
     cursor = conn.cursor()
 
     cursor.execute('''
@@ -24,7 +24,7 @@ def db_add(username:str, email:str, password: str):
     conn.close()
 
 def db_login(username: str, password: str):
-    conn = sqlite3.connect("backend/logins.db")
+    conn = sqlite3.connect("logins.db")
     cursor = conn.cursor()
 
     cursor.execute('''
