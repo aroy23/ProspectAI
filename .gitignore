@@ -5,7 +5,7 @@ backend/input_videos/
 backend/output_videos/
 /backend/.env
 .venv/
-.DS_STORE
+.DS_Store
 .venv
 .env
 env
