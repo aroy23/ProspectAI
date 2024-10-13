@@ -6,3 +6,5 @@ output_videos/
 .env
 .venv/
 .DS_STORE
+.venv
+env
