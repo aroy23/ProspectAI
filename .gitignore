@@ -1,4 +1,12 @@
-test.mp4
+*__pycache__*
+*.pyc
+models/
+input_videos/
+output_videos/
 .env
+.venv/
+.DS_STORE
 .venv
 env
+aud
+vid
