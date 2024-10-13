@@ -37,7 +37,7 @@ class PlayerBallAssigner():
                         142: 'White',
                         227: 'White'}
         self.currentpossession = 'White'
-        self.set_possession = {22, 6, 11, 91, 13, 7,  5, 13, 213, 236, 7, 5, 12, 3}
+        self.set_possession = {6, 11, 91, 13, 7, 213, 3, 5}
         with open('commentary.txt', 'w') as f:
             f.write('')
     def assign_ball_to_player(self, players, ball_bbox):
@@ -67,8 +67,8 @@ class PlayerBallAssigner():
             self.last_assigned_player = assigned_player
             with open('commentary.txt', 'a') as f:
                 if assigned_player in self.set_possession:
-                    f.write("Player " + str(assigned_player) + " possesses the ball\n")
+                    f.write("Player " + str(assigned_player) + " of " + self.teams[assigned_player] + " possesses the ball\n")
                     if self.teams[assigned_player] != self.currentpossession:
                         self.currentpossession = self.teams[assigned_player]
-                        f.write("Possession changed to " + self.currentpossession + "\n")
+                        f.write("Possession changed to " + self.currentpossession + " player " + str(assigned_player) + "\n")
         return assigned_player

@@ -8,3 +8,5 @@ output_videos/
 .DS_STORE
 .venv
 env
+aud
+vid

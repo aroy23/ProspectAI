@@ -49,7 +49,7 @@ class SoccerCommentaryGenerator:
 
     def generate_commentary(self, play_by_play_string):
         """Generates soccer commentary based on play-by-play data"""
-        prompt = f"""This is a play-by-play for a soccer match. You are a soccer commentator. Generate commentary for a short 30-second clip.
+        prompt = f"""This is a play-by-play for a soccer match. You are a soccer commentator. Generate commentary for a short 17-second clip.
 
         Player 91 is the goalie of the white team, player 213 is the goalie of the green team. 
         No goals were scored, only passes in this sequence.
@@ -59,6 +59,12 @@ class SoccerCommentaryGenerator:
 
         Here is the play by play:
         {play_by_play_string}
+
+        After player 91 gets the ball, pause for 4 seconds but do not physically write this before continuing the commentary. you can fill in the pause with general commentary about the game but 
+        
+        DO NOT talk about the physical pause in the script so a commentator can read it naturally
+
+        Make sure to include all plays in the play by play in the commentary. Also, at the end there is no need to summarize just finish talking when the last play ends
         """
 
         # Call the OpenAI API using the chat completion method
