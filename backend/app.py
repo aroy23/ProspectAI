@@ -39,6 +39,10 @@ def login(username, password):
     except TypeError as e:
         return jsonify({'error': 'Enter both email and password!'})
     
+@app.route('/signup_page', methods=['GET'])
+def signup_page():
+    return render_template('signup.html')
+    
 @app.route('/analyze', methods=['GET', 'POST'])
 def analyze():
     return 0

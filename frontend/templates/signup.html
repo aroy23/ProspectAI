@@ -8,13 +8,13 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
     <title>Sign Up</title>
 </head>
 <body>
     <div class="container">
         <!-- Logo image above the form -->
-        <img src="images/logo.png" alt="Logo" class="logo">
+        <img src="../static/images/logo.png" alt="Logo" class="logo">
         <h1>Sign Up</h1>
         <div id="signup-error-message" style="color: red; display: none;"></div>
         <form id="signup-form" onsubmit="return validateSignup(event)">
@@ -24,7 +24,7 @@
             <button type="submit">Sign Up</button>
         </form>
         <footer>
-            <p>Already have an account? <a href="login.html" style="color: #66cccc;">Log in</a></p>
+            <p>Already have an account? <a href="{{ url_for('login_page') }}" style="color: #66cccc;">Log in</a></p>
         </footer>
     </div>
     
