@@ -17,12 +17,13 @@
                <img src="https://via.placeholder.com/120/cccccc/FFFFFF/?text=Profile" alt="Profile Picture" />
            </div>
            <h3>User Info</h3>
-           <p><strong>Username:</strong> <span id="username">JohnDoe</span></p>
+           <p><strong>Name:</strong> <span id="name">JohnDoe</span></p>
            <p><strong>Email:</strong> <span id="email">john.doe@example.com</span></p>
            <p><strong>Sport:</strong> <span id="sport">Basketball</span></p>
            <p><strong>Age:</strong> <span id="age">17</span></p>
            <p><strong>Gender:</strong> <span id="gender">Male</span></p>
            <p><strong>Grade:</strong> <span id="grade">11</span></p>
+           <button class="edit-button" onclick="openEditPopup()">Edit</button>
        </div>
 
 
@@ -45,25 +46,109 @@
 
 
        <div class="right-panel">
-           <h3>Search College</h3>
+           <h3>Select College</h3>
+           <div class="search-college">
+               <select id="collegeSelect" onchange="showCollegeInfo()">
+                   <option value="" disabled selected>Select a college</option>
+                   <option value="College 1">College 1</option>
+                   <option value="College 2">College 2</option>
+                   <option value="College 3">College 3</option>
+               </select>
+               <div class="college-info" id="collegeInfo" style="display: none;">
+                   <h4 id="collegeName"></h4>
+                   <p id="collegeDescription"></p>
+               </div>
+           </div>
+
+
+           <h3>My Colleges</h3>
            <div class="college-link">
                <span class="college-name">College 1</span>
                <a href="https://linktoathleticspage1.com" target="_blank">Visit College Athletics</a>
-               <a class="college-email" href="mailto:recruiter1@college.edu">recruiter1@college.edu</a>
            </div>
            <div class="college-link">
                <span class="college-name">College 2</span>
                <a href="https://linktoathleticspage2.com/" target="_blank">Visit College Athletics</a>
-               <a class="college-email" href="mailto:recruiter2@college.edu">recruiter2@college.edu</a>
            </div>
            <div class="college-link">
                <span class="college-name">College 3</span>
                <a href="https://linktoathleticspage3.com" target="_blank">Visit College Athletics</a>
-               <a class="college-email" href="mailto:recruiter3@college.edu">recruiter3@college.edu</a>
            </div>
        </div>
    </div>
+
+
+   <!-- Edit Information Popup -->
+   <div id="editPopup" class="popup" style="display:none;">
+       <div class="popup-content">
+           <span class="close" onclick="closeEditPopup()">&times;</span>
+           <h2>Edit Information</h2>
+           <label for="editName">Name:</label>
+           <input type="text" id="editName" value="JohnDoe">
+           <label for="editEmail">Email:</label>
+           <input type="email" id="editEmail" value="john.doe@example.com">
+           <label for="editSport">Sport:</label>
+           <input type="text" id="editSport" value="Basketball">
+           <label for="editAge">Age:</label>
+           <input type="number" id="editAge" value="17">
+           <label for="editGender">Gender:</label>
+           <select id="editGender">
+               <option value="Male" selected>Male</option>
+               <option value="Female">Female</option>
+               <option value="Other">Other</option>
+           </select>
+           <label for="editGrade">Grade:</label>
+           <input type="number" id="editGrade" value="11">
+           <button onclick="saveChanges()">Save Changes</button>
+       </div>
+   </div>
+
+
+   <script>
+       function showCollegeInfo() {
+           const select = document.getElementById('collegeSelect');
+           const collegeInfo = document.getElementById('collegeInfo');
+           const collegeName = document.getElementById('collegeName');
+           const collegeDescription = document.getElementById('collegeDescription');
+
+
+           const collegeData = {
+               "College 1": "College 1 is known for its excellent sports program.",
+               "College 2": "College 2 has a strong basketball team and good scholarship opportunities.",
+               "College 3": "College 3 offers various athletic scholarships and training facilities."
+           };
+
+
+           const selectedCollege = select.value;
+           if (selectedCollege) {
+               collegeName.textContent = selectedCollege;
+               collegeDescription.textContent = collegeData[selectedCollege];
+               collegeInfo.style.display = 'block';
+           } else {
+               collegeInfo.style.display = 'none';
+           }
+       }
+
+
+       function openEditPopup() {
+           document.getElementById('editPopup').style.display = 'block';
+       }
+
+
+       function closeEditPopup() {
+           document.getElementById('editPopup').style.display = 'none';
+       }
+
+
+       function saveChanges() {
+           document.getElementById('name').textContent = document.getElementById('editName').value;
+           document.getElementById('email').textContent = document.getElementById('editEmail').value;
+           document.getElementById('sport').textContent = document.getElementById('editSport').value;
+           document.getElementById('age').textContent = document.getElementById('editAge').value;
+           document.getElementById('gender').textContent = document.getElementById('editGender').value;
+           document.getElementById('grade').textContent = document.getElementById('editGrade').value;
+           closeEditPopup();
+       }
+   </script>
 </body>
 </html>
-
-

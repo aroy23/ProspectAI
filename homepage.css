@@ -189,10 +189,14 @@ body {
  }
  
  
- .college-email {
-    margin-left: 10px; /* Space between link and email */
-    color: #003c3c; /* Main Color */
-    text-decoration: none; /* No underline */
+ /* Dropdown Menu Styles */
+ #collegeSelect {
+    width: 100%; /* Full width of the panel */
+    padding: 10px; /* Padding for better touch target */
+    border-radius: 5px; /* Less rounded corners */
+    border: 1px solid #ccc; /* Light border */
+    background-color: #ffffff; /* White background */
+    margin-bottom: 20px; /* Space below dropdown */
  }
  
  
