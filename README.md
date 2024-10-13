@@ -29,7 +29,7 @@ Each year, high school student-athletes face a daunting recruitment process as t
 
 ## Installation
 
-To set up ProspectAI locally, ensure you have Python installed and clone this repository. Then, install the required dependencies:
+To set up Prospect AI locally, ensure you have Python installed and clone this repository. Then, install the required dependencies:
 
 ```bash
 pip install ultralytics
