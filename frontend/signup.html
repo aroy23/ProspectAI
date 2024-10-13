@@ -2,6 +2,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap" rel="stylesheet">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
@@ -9,6 +13,8 @@
 </head>
 <body>
     <div class="container">
+        <!-- Logo image above the form -->
+        <img src="images/logo.png" alt="Logo" class="logo">
         <h1>Sign Up</h1>
         <div id="signup-error-message" style="color: red; display: none;"></div>
         <form id="signup-form" onsubmit="return validateSignup(event)">
@@ -53,4 +59,10 @@
         }
     </script>
 </body>
+
+<!-- Small text box for credits -->
+<div class="bottom-text-box">
+    <p>A project made for Cerebral Beach Hacks, 2024.</p>
+</div>
+
 </html>
