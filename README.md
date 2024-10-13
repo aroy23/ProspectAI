@@ -1,6 +1,6 @@
-# ProspectAI
+# Prospect AI
 
-ProspectAI is a cutting-edge platform designed to bridge the gap between high school athletes and college recruiters, streamlining the recruitment process through AI-driven highlights and commentary. Athletes can upload their sports footage, and recruiters can quickly evaluate talent thanks to object detection, play-by-play commentary, and player tracking.
+Prospect AI is a cutting-edge platform designed to bridge the gap between high school athletes and college recruiters, streamlining the recruitment process through AI-driven highlights and commentary. Athletes can upload their sports footage, and recruiters can quickly evaluate talent thanks to object detection, play-by-play commentary, and player tracking.
 
 ## Inspiration
 
