@@ -20,7 +20,7 @@ class VideoAudioGenerator:
         audio_path = os.path.join(self.audio_dir, "my-file.mp3")
         final_video_path = os.path.join(self.output_video_dir, "video_with_audio.mp4")
         
-        # Load video
+        # Load video from path
         video = VideoFileClip(self.video_path)
 
         # Generate audio from ElevenLabs
