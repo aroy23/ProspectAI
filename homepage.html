@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap" rel="stylesheet">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProspectAI</title>
+
     <link rel="stylesheet" href="homepage.css">
     <style>
         /* Modal popup styling */
@@ -119,7 +124,7 @@
 
         /* Header Styles */
         header {
-            background-color: #003c3c; /* Main Color */
+            background-color: #ffffff; /* Main Color */
             color: white;
             text-align: center;
             padding: 10px; /* Shortened padding */
@@ -142,39 +147,48 @@
         .sign-out-button:hover {
             background-color: #d32f2f;
         }
+        
+        /* Profile Picture Styles */
+        .profile-pic img {
+            width: 120px; /* Fixed width */
+            height: 120px; /* Fixed height */
+            border-radius: 50%; /* Circular image */
+            border: 2px solid #ccc; /* Border for image */
+        }
+        
+        .upload-section {
+            margin-top: 20px; /* Space above upload section */
+        }
     </style>
 </head>
+
 <body>
     <header>
-        <h1>ProspectAI</h1>
+        <img src="./frontend/images/logo.png" style="width: 400px; height: auto;">
         <button class="sign-out-button">Sign Out</button>
     </header>
 
     <div class="container">
         <div class="left-panel">
-            <div class="profile-pic">
-                <img src="https://via.placeholder.com/120/cccccc/FFFFFF/?text=Profile" alt="Profile Picture" />
+            <div class="profile-pic" id="profilePicture">
+                <img src="default.png" alt="Profile Picture" />
             </div>
-            <h3>User Info</h3>
             <p><strong>Name:</strong> <span id="name">JohnDoe</span></p>
-            <p><strong>Email:</strong> <span id="email">john.doe@example.com</span></p>
             <p><strong>Sport:</strong> <span id="sport">Basketball</span></p>
             <p><strong>Player Number:</strong> <span id="playerNumber">23</span></p>
             <p><strong>Age:</strong> <span id="age">17</span></p>
             <p><strong>Gender:</strong> <span id="gender">Male</span></p>
             <p><strong>Grade:</strong> <span id="grade">11</span></p>
-            <button class="edit-button" onclick="openEditPopup()">Edit</button>
+            <button class="edit-button" onclick="openEditPopup()">Edit Info</button>
+            <button class="edit-button" onclick="openProfilePicturePopup()">Change Photo</button>
         </div>
 
         <!-- Main content: Upload sports video section -->
         <div class="main-content">
-            <h2>Upload Your Sports Video</h2>
+            <h2>Upload Your Highlight Video</h2>
             <div class="upload-section">
                 <label for="videoUpload">Choose video to upload:</label>
                 <input type="file" id="videoUpload" accept="video/*">
-                <div class="video-box" id="videoPreview">
-                    <!-- Video will be loaded here -->
-                </div>
                 <button type="button" onclick="uploadVideo()">Upload Video</button>
             </div>
         </div>
@@ -182,6 +196,7 @@
         <!-- College selection panel -->
         <div class="right-panel">
             <h3>Select College</h3>
+            <h4>Use the search function to list colleges you're interested in!</h4>
             <div class="search-college">
                 <select id="collegeSelect" onchange="showCollegeInfo()">
                     <option value="" disabled selected>Select a college</option>
@@ -218,80 +233,115 @@
         </div>
     </div>
 
+    <!-- Profile Picture Upload Popup -->
+    <div id="profilePicturePopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closeProfilePicturePopup()">&times;</span>
+            <h2>Change Profile Picture</h2>
+            <input type="file" id="profilePictureInput" accept="image/*" onchange="previewProfilePicture(event)">
+            <div id="profilePicturePreview">
+                <img src="default.png" alt="Profile Picture Preview" id="previewImg" />
+            </div>
+            <button onclick="uploadProfilePicture()">Upload Profile Picture</button>
+        </div>
+    </div>
+
     <script>
-        // Function to open the popup modal
         function openEditPopup() {
-            document.getElementById('editPopup').style.display = 'flex'; // Show the popup
+            document.getElementById('editPopup').style.display = 'flex';
         }
 
-        // Function to close the popup modal
         function closeEditPopup() {
-            document.getElementById('editPopup').style.display = 'none'; // Hide the popup
+            document.getElementById('editPopup').style.display = 'none';
         }
 
-        // Function to save the edited changes
-        function saveChanges() {
-            document.getElementById('name').textContent = document.getElementById('editName').value;
-            document.getElementById('sport').textContent = document.getElementById('editSport').value;
-            document.getElementById('playerNumber').textContent = document.getElementById('editPlayerNumber').value;
-            document.getElementById('age').textContent = document.getElementById('editAge').value;
-            document.getElementById('grade').textContent = document.getElementById('editGrade').value;
-            closeEditPopup(); // Close the popup after saving
+        function openProfilePicturePopup() {
+            document.getElementById('profilePicturePopup').style.display = 'flex';
         }
 
-        // Function to upload video
+        function closeProfilePicturePopup() {
+            document.getElementById('profilePicturePopup').style.display = 'none';
+        }
+
+        function previewProfilePicture(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById('previewImg').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function uploadProfilePicture() {
+            const fileInput = document.getElementById('profilePictureInput');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('profilePicture').querySelector('img').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+                closeProfilePicturePopup();
+            } else {
+                alert('Please select an image file to upload.');
+            }
+        }
+
         function uploadVideo() {
             const videoUpload = document.getElementById('videoUpload');
             const videoPreview = document.getElementById('videoPreview');
-            const file = videoUpload.files[0];
 
-            if (file) {
+            if (videoUpload.files.length > 0) {
+                const videoFile = videoUpload.files[0];
                 const videoElement = document.createElement('video');
-                videoElement.src = URL.createObjectURL(file);
-                videoElement.controls = true; // Add video controls
-                videoElement.autoplay = true; // Auto play video
-
-                // Clear previous video preview and append new video
-                videoPreview.innerHTML = '';
-                videoPreview.appendChild(videoElement);
+                videoElement.src = URL.createObjectURL(videoFile);
+                videoElement.controls = true; // Add controls to the video
+                videoPreview.innerHTML = ''; // Clear any existing video
+                videoPreview.appendChild(videoElement); // Append the new video
+            } else {
+                alert('Please select a video file to upload.');
             }
         }
 
-        // Keep track of added colleges
-        const addedColleges = new Set();
+        function saveChanges() {
+            const name = document.getElementById('editName').value;
+            const sport = document.getElementById('editSport').value;
+            const playerNumber = document.getElementById('editPlayerNumber').value;
+            const age = document.getElementById('editAge').value;
+            const grade = document.getElementById('editGrade').value;
 
-        // Function to add selected college to the list
+            document.getElementById('name').textContent = name;
+            document.getElementById('sport').textContent = sport;
+            document.getElementById('playerNumber').textContent = playerNumber;
+            document.getElementById('age').textContent = age;
+            document.getElementById('grade').textContent = grade;
+
+            closeEditPopup();
+        }
+
+        function showCollegeInfo() {
+            const collegeSelect = document.getElementById('collegeSelect');
+            const selectedCollege = collegeSelect.value;
+
+            if (selectedCollege) {
+                const collegeInfo = document.createElement('div');
+                collegeInfo.className = 'college-link';
+                collegeInfo.innerHTML = `<span class="college-name">${selectedCollege}</span>
+                <button onclick="removeCollege(this)">Remove</button>`;
+                document.getElementById('myColleges').appendChild(collegeInfo);
+            }
+        }
+
         function addCollege() {
             const collegeSelect = document.getElementById('collegeSelect');
-            const collegeName = collegeSelect.value;
-
-            if (collegeName && !addedColleges.has(collegeName)) {
-                const collegeList = document.getElementById('myColleges');
-                const collegeItem = document.createElement('div');
-                collegeItem.classList.add('college-link');
-                collegeItem.innerHTML = `
-                    <span class="college-name">${collegeName}</span>
-                    <button onclick="removeCollege(this)">Remove</button>
-                `;
-                collegeList.appendChild(collegeItem);
-                addedColleges.add(collegeName); // Add college to the set
-            } else if (addedColleges.has(collegeName)) {
-                alert(`${collegeName} has already been added.`); // Alert if already added
-            }
+            collegeSelect.selectedIndex = 0; // Reset selection
         }
 
-        // Function to remove college from the list
         function removeCollege(button) {
-            const collegeItem = button.parentElement;
-            const collegeName = collegeItem.querySelector('.college-name').textContent;
-            collegeItem.remove(); // Remove the college item from the list
-            addedColleges.delete(collegeName); // Remove college from the set
-        }
-
-        // Function to show college info (can be customized later)
-        function showCollegeInfo() {
-            // Functionality can be implemented based on requirements
+            button.parentElement.remove();
         }
     </script>
 </body>
+
 </html>
