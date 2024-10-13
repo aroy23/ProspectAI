@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>ProspectAI</title>
+   <link rel="stylesheet" href="homepage.css">
+</head>
+<body>
+   <header>
+       <h1>ProspectAI</h1>
+       <button class="sign-out-button">Sign Out</button>
+   </header>
+   <div class="container">
+       <div class="left-panel">
+           <div class="profile-pic">
+               <img src="https://via.placeholder.com/120/cccccc/FFFFFF/?text=Profile" alt="Profile Picture" />
+           </div>
+           <h3>User Info</h3>
+           <p><strong>Username:</strong> <span id="username">JohnDoe</span></p>
+           <p><strong>Email:</strong> <span id="email">john.doe@example.com</span></p>
+           <p><strong>Sport:</strong> <span id="sport">Basketball</span></p>
+           <p><strong>Age:</strong> <span id="age">17</span></p>
+           <p><strong>Gender:</strong> <span id="gender">Male</span></p>
+           <p><strong>Grade:</strong> <span id="grade">11</span></p>
+       </div>
+
+
+       <div class="main-content">
+           <h2>Upload Your Sports Video</h2>
+           <div class="upload-section">
+               <label for="videoUpload">Choose video to upload:</label>
+               <input type="file" id="videoUpload" accept="video/*">
+               <div class="video-box" id="videoPreview">
+                   <!-- Video will be loaded here -->
+               </div>
+               <h3>Commentary</h3>
+               <div class="commentary" id="commentary">
+                   <!-- Commentary from the video will be displayed here -->
+                   No commentary available.
+               </div>
+               <button type="button" onclick="uploadVideo()">Upload Video</button>
+           </div>
+       </div>
+
+
+       <div class="right-panel">
+           <h3>Search College</h3>
+           <div class="college-link">
+               <span class="college-name">College 1</span>
+               <a href="https://linktoathleticspage1.com" target="_blank">Visit College Athletics</a>
+               <a class="college-email" href="mailto:recruiter1@college.edu">recruiter1@college.edu</a>
+           </div>
+           <div class="college-link">
+               <span class="college-name">College 2</span>
+               <a href="https://linktoathleticspage2.com/" target="_blank">Visit College Athletics</a>
+               <a class="college-email" href="mailto:recruiter2@college.edu">recruiter2@college.edu</a>
+           </div>
+           <div class="college-link">
+               <span class="college-name">College 3</span>
+               <a href="https://linktoathleticspage3.com" target="_blank">Visit College Athletics</a>
+               <a class="college-email" href="mailto:recruiter3@college.edu">recruiter3@college.edu</a>
+           </div>
+       </div>
+   </div>
+</body>
+</html>
+
+

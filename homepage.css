@@ -1,0 +1,202 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #f0f0f0;
+ }
+ 
+ 
+ /* Header Styles */
+ header {
+    background-color: #003c3c; /* Main Color */
+    color: white;
+    text-align: center;
+    padding: 10px; /* Shortened padding */
+    position: relative;
+    border-radius: 0 0 10px 10px; /* Slightly rounded bottom corners */
+ }
+ 
+ 
+ .sign-out-button {
+    position: absolute;
+    right: 20px;
+    top: 10px; /* Adjusted position for a shorter header */
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px; /* Less rounded corners */
+    padding: 8px 12px; /* Adjusted padding */
+    cursor: pointer;
+ }
+ 
+ 
+ .sign-out-button:hover {
+    background-color: #d32f2f;
+ }
+ 
+ 
+ /* Main Container Styles */
+ .container {
+    display: flex;
+    width: 100%;
+    flex: 1;
+    border-radius: 10px; /* Less rounded corners for the entire container */
+    overflow: hidden; /* Clip corners for smooth edges */
+ }
+ 
+ 
+ /* Left Panel Styles */
+ .left-panel {
+    width: 20%; /* Adjusted width for skinnier panel */
+    background-color: #e6f7f7; /* Light Background for Contrast */
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    border-radius: 10px 0 0 10px; /* Less rounded left corners */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align items */
+ }
+ 
+ 
+ .profile-pic {
+    width: 120px; /* Diameter of the circle */
+    height: 120px; /* Diameter of the circle */
+    border-radius: 50%; /* Circle shape */
+    background-color: #ccc; /* Placeholder color */
+    margin-bottom: 20px; /* Space below profile picture */
+    overflow: hidden; /* Ensure content stays within circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+ 
+ 
+ .profile-pic img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Maintain aspect ratio */
+ }
+ 
+ 
+ /* Main Content Styles */
+ .main-content {
+    width: 50%;
+    padding: 20px;
+    background-color: #ffffff; /* White background for contrast */
+    border-radius: 0; /* No rounded corners */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+ }
+ 
+ 
+ .video-box {
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    background-color: #eee; /* Light background for video */
+    position: relative;
+    margin-bottom: 10px; /* Space below the video box */
+    border-radius: 5px; /* Less rounded corners */
+ }
+ 
+ 
+ /* Right Panel Styles */
+ .right-panel {
+    width: 25%;
+    background-color: #e6f7f7; /* Light Background for Contrast */
+    padding: 20px;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+    border-radius: 0 10px 10px 0; /* Less rounded right corners */
+ }
+ 
+ 
+ /* Upload Section Styles */
+ .upload-section {
+    margin-top: 20px;
+ }
+ 
+ 
+ input[type="file"] {
+    display: block;
+    margin: 10px 0;
+    border-radius: 5px; /* Less rounded corners */
+    padding: 10px; /* Padding for file input */
+    border: 1px solid #ccc; /* Light border */
+    width: calc(100% - 20px); /* Adjust width to fit */
+ }
+ 
+ 
+ .commentary {
+    width: 100%;
+    height: 100px;
+    margin-top: 10px;
+    border-radius: 5px; /* Less rounded corners */
+    border: 1px solid #ccc; /* Light border */
+    background-color: #f9f9f9; /* Light background for captions */
+    padding: 10px; /* Padding for text */
+    overflow-y: auto; /* Scrollable if content overflows */
+ }
+ 
+ 
+ button {
+    background-color: #003c3c; /* Main Color */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Less rounded corners */
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+ }
+ 
+ 
+ button:hover {
+    background-color: #005757; /* Darker Shade on Hover */
+ }
+ 
+ 
+ /* College Section Styles */
+ h3 {
+    margin: 15px 0; /* Space above and below headers */
+    color: #003c3c; /* Main Color */
+ }
+ 
+ 
+ .college-link {
+    display: flex;
+    flex-direction: column; /* Stack link and email */
+    margin: 10px 0;
+    color: #003c3c; /* Main Color */
+    text-decoration: none;
+    border-radius: 5px; /* Less rounded corners */
+    padding: 5px; /* Padding for Links */
+    transition: background-color 0.3s;
+ }
+ 
+ 
+ .college-name {
+    font-weight: bold; /* Bold for school names */
+    font-size: 1.1em; /* Slightly bigger font size */
+    margin-bottom: 5px; /* Space below school name */
+ }
+ 
+ 
+ .college-link a {
+    color: #003c3c; /* Main Color for links */
+    text-decoration: none; /* No underline */
+ }
+ 
+ 
+ .college-email {
+    margin-left: 10px; /* Space between link and email */
+    color: #003c3c; /* Main Color */
+    text-decoration: none; /* No underline */
+ }
+ 
+ 
+ .college-link:hover {
+    background-color: #d1e6e6; /* Light hover effect */
+ }
+ 
