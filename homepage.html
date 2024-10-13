@@ -159,6 +159,7 @@
             <p><strong>Name:</strong> <span id="name">JohnDoe</span></p>
             <p><strong>Email:</strong> <span id="email">john.doe@example.com</span></p>
             <p><strong>Sport:</strong> <span id="sport">Basketball</span></p>
+            <p><strong>Player Number:</strong> <span id="playerNumber">23</span></p>
             <p><strong>Age:</strong> <span id="age">17</span></p>
             <p><strong>Gender:</strong> <span id="gender">Male</span></p>
             <p><strong>Grade:</strong> <span id="grade">11</span></p>
@@ -207,6 +208,8 @@
             <input type="text" id="editName" value="JohnDoe">
             <label for="editSport">Sport:</label>
             <input type="text" id="editSport" value="Basketball">
+            <label for="editPlayerNumber">Player Number:</label>
+            <input type="number" id="editPlayerNumber" value="23">
             <label for="editAge">Age:</label>
             <input type="number" id="editAge" value="17">
             <label for="editGrade">Grade:</label>
@@ -230,6 +233,7 @@
         function saveChanges() {
             document.getElementById('name').textContent = document.getElementById('editName').value;
             document.getElementById('sport').textContent = document.getElementById('editSport').value;
+            document.getElementById('playerNumber').textContent = document.getElementById('editPlayerNumber').value;
             document.getElementById('age').textContent = document.getElementById('editAge').value;
             document.getElementById('grade').textContent = document.getElementById('editGrade').value;
             closeEditPopup(); // Close the popup after saving
