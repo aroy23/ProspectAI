@@ -1,9 +1,11 @@
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
+from pathlib import Path
 
 # Load environment variables from .env file
-load_dotenv()
+env_path = Path('../.env')
+load_dotenv(dotenv_path=env_path)
 
 class SoccerCommentaryGenerator:
     def __init__(self):

@@ -3,11 +3,13 @@ from elevenlabs import save
 from moviepy.editor import VideoFileClip, AudioFileClip, vfx
 from dotenv import load_dotenv
 import os
+from pathlib import Path
 
+env_path = Path('../.env')
+load_dotenv(dotenv_path=env_path)
 class VideoAudioGenerator:
-    def __init__(self, video_path, audio_dir, output_video_dir, api_key_env_var="ELEVENLABS_API_KEY"):
-        load_dotenv()
-        self.api_key = 'sk_0b57e94b84e4c19a5e06bae8943f4e6480adc8c6e1f22c06'
+    def __init__(self, video_path, audio_dir, output_video_dir):
+        self.api_key = os.getenv('ELEVENLABS_API_KEY')
         self.client = ElevenLabs(api_key=self.api_key)
         self.video_path = video_path
         self.audio_dir = audio_dir

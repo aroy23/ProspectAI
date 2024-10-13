@@ -3,10 +3,11 @@
 models/
 backend/input_videos/
 backend/output_videos/
-.env
+/backend/.env
 .venv/
 .DS_STORE
 .venv
+.env
 env
 backend/aud
 backend/vid
