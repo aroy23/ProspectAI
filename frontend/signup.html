@@ -1,0 +1,68 @@
+<!-- signup.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Sign Up</title>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo image above the form -->
+        <img src="images/logo.png" alt="Logo" class="logo">
+        <h1>Sign Up</h1>
+        <div id="signup-error-message" style="color: red; display: none;"></div>
+        <form id="signup-form" onsubmit="return validateSignup(event)">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+        <footer>
+            <p>Already have an account? <a href="login.html" style="color: #66cccc;">Log in</a></p>
+        </footer>
+    </div>
+    
+    <script>
+        // Simulated taken usernames and emails (for demonstration purposes)
+        const takenUsernames = ["takenUsername1", "takenUsername2", "admin"];
+        const takenEmails = ["taken@example.com", "user@example.com"];
+
+        function validateSignup(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const username = document.querySelector('input[name="username"]').value;
+            const email = document.querySelector('input[name="email"]').value;
+            const errorMessageDiv = document.getElementById('signup-error-message');
+
+            // Reset error message
+            errorMessageDiv.style.display = "none"; 
+            errorMessageDiv.textContent = "";
+
+            // Check if the entered username is in the list of taken usernames
+            if (takenUsernames.includes(username)) {
+                errorMessageDiv.textContent = "Username is already taken. Please choose a different one.";
+                errorMessageDiv.style.display = "block"; // Show the error message
+            } else if (takenEmails.includes(email)) {
+                errorMessageDiv.textContent = "Email is already taken. Please choose a different one.";
+                errorMessageDiv.style.display = "block"; // Show the error message
+            } else {
+                errorMessageDiv.style.display = "none"; // Hide error message
+                alert('Signup successful!'); // Simulate successful signup
+                // Here you can redirect to a login page or perform further actions
+            }
+        }
+    </script>
+</body>
+
+<!-- Small text box for credits -->
+<div class="bottom-text-box">
+    <p>A project made for Cerebral Beach Hacks, 2024.</p>
+</div>
+
+</html>
