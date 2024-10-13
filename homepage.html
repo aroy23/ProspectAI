@@ -1,154 +1,347 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>ProspectAI</title>
-   <link rel="stylesheet" href="homepage.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="homepage.css">
+    <style>
+        /* Modal popup styling */
+        .popup {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 100; /* Ensure it sits on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Black background with transparency */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: black;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Video box styles */
+        .video-box {
+            width: 640px; /* Fixed width */
+            height: 360px; /* Fixed height */
+            background-color: #f0f0f0; /* Light grey background */
+            border: 1px solid #ccc; /* Border around the box */
+            border-radius: 4px; /* Rounded corners */
+            overflow: hidden; /* Hide overflow */
+            margin: 0 auto; /* Center the video box */
+            position: relative; /* Position relative for absolute video */
+        }
+
+        .video-box video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 4px; /* Match the video box corners */
+        }
+
+        /* Additional styles for college links */
+        .college-link {
+            display: flex;
+            justify-content: space-between; /* Space between name and button */
+            align-items: center; /* Center items vertically */
+            margin: 10px 0;
+            color: #003c3c; /* Main Color */
+            padding: 5px; /* Padding for Links */
+            border-radius: 5px; /* Less rounded corners */
+            transition: background-color 0.3s;
+        }
+
+        .college-name {
+            font-weight: bold; /* Bold for school names */
+            font-size: 1.1em; /* Slightly bigger font size */
+        }
+
+        .college-link a {
+            color: #003c3c; /* Main Color for links */
+            text-decoration: none; /* No underline */
+        }
+
+        /* Close button styles */
+        .close {
+            font-size: 24px; /* Increase close button size */
+            position: absolute; /* Position close button */
+            right: 15px; /* Adjust right position */
+            top: 10px; /* Adjust top position */
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #ffffff; /* Main Color */
+            color: white;
+            text-align: center;
+            padding: 10px; /* Shortened padding */
+            position: relative;
+            border-radius: 0 0 10px 10px; /* Slightly rounded bottom corners */
+        }
+
+        .sign-out-button {
+            position: absolute;
+            right: 20px;
+            top: 10px; /* Adjusted position for a shorter header */
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 5px; /* Less rounded corners */
+            padding: 8px 12px; /* Adjusted padding */
+            cursor: pointer;
+        }
+
+        .sign-out-button:hover {
+            background-color: #d32f2f;
+        }
+        
+        /* Profile Picture Styles */
+        .profile-pic img {
+            width: 120px; /* Fixed width */
+            height: 120px; /* Fixed height */
+            border-radius: 50%; /* Circular image */
+            border: 2px solid #ccc; /* Border for image */
+        }
+        
+        .upload-section {
+            margin-top: 20px; /* Space above upload section */
+        }
+    </style>
 </head>
+
 <body>
-   <header>
-       <h1>ProspectAI</h1>
-       <button class="sign-out-button">Sign Out</button>
-   </header>
-   <div class="container">
-       <div class="left-panel">
-           <div class="profile-pic">
-               <img src="https://via.placeholder.com/120/cccccc/FFFFFF/?text=Profile" alt="Profile Picture" />
-           </div>
-           <h3>User Info</h3>
-           <p><strong>Name:</strong> <span id="name">JohnDoe</span></p>
-           <p><strong>Email:</strong> <span id="email">john.doe@example.com</span></p>
-           <p><strong>Sport:</strong> <span id="sport">Basketball</span></p>
-           <p><strong>Age:</strong> <span id="age">17</span></p>
-           <p><strong>Gender:</strong> <span id="gender">Male</span></p>
-           <p><strong>Grade:</strong> <span id="grade">11</span></p>
-           <button class="edit-button" onclick="openEditPopup()">Edit</button>
-       </div>
+    <header>
+        <img src="./frontend/images/logo.png" style="width: 400px; height: auto;">
+        <button class="sign-out-button">Sign Out</button>
+    </header>
 
+    <div class="container">
+        <div class="left-panel">
+            <div class="profile-pic" id="profilePicture">
+                <img src="default.png" alt="Profile Picture" />
+            </div>
+            <p><strong>Name:</strong> <span id="name">JohnDoe</span></p>
+            <p><strong>Sport:</strong> <span id="sport">Basketball</span></p>
+            <p><strong>Player Number:</strong> <span id="playerNumber">23</span></p>
+            <p><strong>Age:</strong> <span id="age">17</span></p>
+            <p><strong>Gender:</strong> <span id="gender">Male</span></p>
+            <p><strong>Grade:</strong> <span id="grade">11</span></p>
+            <button class="edit-button" onclick="openEditPopup()">Edit Info</button>
+            <button class="edit-button" onclick="openProfilePicturePopup()">Change Photo</button>
+        </div>
 
-       <div class="main-content">
-           <h2>Upload Your Sports Video</h2>
-           <div class="upload-section">
-               <label for="videoUpload">Choose video to upload:</label>
-               <input type="file" id="videoUpload" accept="video/*">
-               <div class="video-box" id="videoPreview">
-                   <!-- Video will be loaded here -->
-               </div>
-               <h3>Commentary</h3>
-               <div class="commentary" id="commentary">
-                   <!-- Commentary from the video will be displayed here -->
-                   No commentary available.
-               </div>
-               <button type="button" onclick="uploadVideo()">Upload Video</button>
-           </div>
-       </div>
+        <!-- Main content: Upload sports video section -->
+        <div class="main-content">
+            <h2>Upload Your Highlight Video</h2>
+            <div class="upload-section">
+                <label for="videoUpload">Choose video to upload:</label>
+                <input type="file" id="videoUpload" accept="video/*">
+                <button type="button" onclick="uploadVideo()">Upload Video</button>
+            </div>
+        </div>
 
+        <!-- College selection panel -->
+        <div class="right-panel">
+            <h3>Select College</h3>
+            <h4>Use the search function to list colleges you're interested in!</h4>
+            <div class="search-college">
+                <select id="collegeSelect" onchange="showCollegeInfo()">
+                    <option value="" disabled selected>Select a college</option>
+                    <option value="College 1">College 1</option>
+                    <option value="College 2">College 2</option>
+                    <option value="College 3">College 3</option>
+                </select>
+                <button class="add-college-button" onclick="addCollege()">Add</button>
+            </div>
 
-       <div class="right-panel">
-           <h3>Select College</h3>
-           <div class="search-college">
-               <select id="collegeSelect" onchange="showCollegeInfo()">
-                   <option value="" disabled selected>Select a college</option>
-                   <option value="College 1">College 1</option>
-                   <option value="College 2">College 2</option>
-                   <option value="College 3">College 3</option>
-               </select>
-               <div class="college-info" id="collegeInfo" style="display: none;">
-                   <h4 id="collegeName"></h4>
-                   <p id="collegeDescription"></p>
-               </div>
-           </div>
+            <h3>My Colleges</h3>
+            <div id="myColleges">
+                <!-- Added colleges will be displayed here -->
+            </div>
+        </div>
+    </div>
 
+    <!-- Edit Information Popup -->
+    <div id="editPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closeEditPopup()">&times;</span>
+            <h2>Edit Your Information</h2>
+            <label for="editName">Name:</label>
+            <input type="text" id="editName" value="JohnDoe">
+            <label for="editSport">Sport:</label>
+            <input type="text" id="editSport" value="Basketball">
+            <label for="editPlayerNumber">Player Number:</label>
+            <input type="number" id="editPlayerNumber" value="23">
+            <label for="editAge">Age:</label>
+            <input type="number" id="editAge" value="17">
+            <label for="editGrade">Grade:</label>
+            <input type="number" id="editGrade" value="11">
+            <button onclick="saveChanges()">Save Changes</button>
+        </div>
+    </div>
 
-           <h3>My Colleges</h3>
-           <div class="college-link">
-               <span class="college-name">College 1</span>
-               <a href="https://linktoathleticspage1.com" target="_blank">Visit College Athletics</a>
-           </div>
-           <div class="college-link">
-               <span class="college-name">College 2</span>
-               <a href="https://linktoathleticspage2.com/" target="_blank">Visit College Athletics</a>
-           </div>
-           <div class="college-link">
-               <span class="college-name">College 3</span>
-               <a href="https://linktoathleticspage3.com" target="_blank">Visit College Athletics</a>
-           </div>
-       </div>
-   </div>
+    <!-- Profile Picture Upload Popup -->
+    <div id="profilePicturePopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closeProfilePicturePopup()">&times;</span>
+            <h2>Change Profile Picture</h2>
+            <input type="file" id="profilePictureInput" accept="image/*" onchange="previewProfilePicture(event)">
+            <div id="profilePicturePreview">
+                <img src="default.png" alt="Profile Picture Preview" id="previewImg" />
+            </div>
+            <button onclick="uploadProfilePicture()">Upload Profile Picture</button>
+        </div>
+    </div>
 
+    <script>
+        function openEditPopup() {
+            document.getElementById('editPopup').style.display = 'flex';
+        }
 
-   <!-- Edit Information Popup -->
-   <div id="editPopup" class="popup" style="display:none;">
-       <div class="popup-content">
-           <span class="close" onclick="closeEditPopup()">&times;</span>
-           <h2>Edit Information</h2>
-           <label for="editName">Name:</label>
-           <input type="text" id="editName" value="JohnDoe">
-           <label for="editEmail">Email:</label>
-           <input type="email" id="editEmail" value="john.doe@example.com">
-           <label for="editSport">Sport:</label>
-           <input type="text" id="editSport" value="Basketball">
-           <label for="editAge">Age:</label>
-           <input type="number" id="editAge" value="17">
-           <label for="editGender">Gender:</label>
-           <select id="editGender">
-               <option value="Male" selected>Male</option>
-               <option value="Female">Female</option>
-               <option value="Other">Other</option>
-           </select>
-           <label for="editGrade">Grade:</label>
-           <input type="number" id="editGrade" value="11">
-           <button onclick="saveChanges()">Save Changes</button>
-       </div>
-   </div>
+        function closeEditPopup() {
+            document.getElementById('editPopup').style.display = 'none';
+        }
 
+        function openProfilePicturePopup() {
+            document.getElementById('profilePicturePopup').style.display = 'flex';
+        }
 
-   <script>
-       function showCollegeInfo() {
-           const select = document.getElementById('collegeSelect');
-           const collegeInfo = document.getElementById('collegeInfo');
-           const collegeName = document.getElementById('collegeName');
-           const collegeDescription = document.getElementById('collegeDescription');
+        function closeProfilePicturePopup() {
+            document.getElementById('profilePicturePopup').style.display = 'none';
+        }
 
+        function previewProfilePicture(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById('previewImg').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
 
-           const collegeData = {
-               "College 1": "College 1 is known for its excellent sports program.",
-               "College 2": "College 2 has a strong basketball team and good scholarship opportunities.",
-               "College 3": "College 3 offers various athletic scholarships and training facilities."
-           };
+        function uploadProfilePicture() {
+            const fileInput = document.getElementById('profilePictureInput');
+            const file = fileInput.files[0];
 
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('profilePicture').querySelector('img').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+                closeProfilePicturePopup();
+            } else {
+                alert('Please select an image file to upload.');
+            }
+        }
 
-           const selectedCollege = select.value;
-           if (selectedCollege) {
-               collegeName.textContent = selectedCollege;
-               collegeDescription.textContent = collegeData[selectedCollege];
-               collegeInfo.style.display = 'block';
-           } else {
-               collegeInfo.style.display = 'none';
-           }
-       }
+        function uploadVideo() {
+            const videoUpload = document.getElementById('videoUpload');
+            const videoPreview = document.getElementById('videoPreview');
 
+            if (videoUpload.files.length > 0) {
+                const videoFile = videoUpload.files[0];
+                const videoElement = document.createElement('video');
+                videoElement.src = URL.createObjectURL(videoFile);
+                videoElement.controls = true; // Add controls to the video
+                videoPreview.innerHTML = ''; // Clear any existing video
+                videoPreview.appendChild(videoElement); // Append the new video
+            } else {
+                alert('Please select a video file to upload.');
+            }
+        }
 
-       function openEditPopup() {
-           document.getElementById('editPopup').style.display = 'block';
-       }
+        function saveChanges() {
+            const name = document.getElementById('editName').value;
+            const sport = document.getElementById('editSport').value;
+            const playerNumber = document.getElementById('editPlayerNumber').value;
+            const age = document.getElementById('editAge').value;
+            const grade = document.getElementById('editGrade').value;
 
+            document.getElementById('name').textContent = name;
+            document.getElementById('sport').textContent = sport;
+            document.getElementById('playerNumber').textContent = playerNumber;
+            document.getElementById('age').textContent = age;
+            document.getElementById('grade').textContent = grade;
 
-       function closeEditPopup() {
-           document.getElementById('editPopup').style.display = 'none';
-       }
+            closeEditPopup();
+        }
 
+        function showCollegeInfo() {
+            const collegeSelect = document.getElementById('collegeSelect');
+            const selectedCollege = collegeSelect.value;
 
-       function saveChanges() {
-           document.getElementById('name').textContent = document.getElementById('editName').value;
-           document.getElementById('email').textContent = document.getElementById('editEmail').value;
-           document.getElementById('sport').textContent = document.getElementById('editSport').value;
-           document.getElementById('age').textContent = document.getElementById('editAge').value;
-           document.getElementById('gender').textContent = document.getElementById('editGender').value;
-           document.getElementById('grade').textContent = document.getElementById('editGrade').value;
-           closeEditPopup();
-       }
-   </script>
+            if (selectedCollege) {
+                const collegeInfo = document.createElement('div');
+                collegeInfo.className = 'college-link';
+                collegeInfo.innerHTML = `<span class="college-name">${selectedCollege}</span>
+                <button onclick="removeCollege(this)">Remove</button>`;
+                document.getElementById('myColleges').appendChild(collegeInfo);
+            }
+        }
+
+        function addCollege() {
+            const collegeSelect = document.getElementById('collegeSelect');
+            collegeSelect.selectedIndex = 0; // Reset selection
+        }
+
+        function removeCollege(button) {
+            button.parentElement.remove();
+        }
+    </script>
 </body>
+
 </html>
