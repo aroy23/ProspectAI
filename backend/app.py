@@ -83,19 +83,32 @@ def signup_page():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    username = request.form.get('username')
-    email = request.form.get('email')
-    password = request.form.get('password')
-    try:
-        db_add(username, email, password)
-        return render_template('login.html')
-    except sqlite3.IntegrityError and TypeError as e:
-        if e == 'UNIQUE constraint failed: user_data.email':
-            return jsonify({'error': 'Email is already in use!'})
-        elif e == 'UNIQUE constraint failed: user_data.username':
-            return jsonify({'error': 'Username is already in use!'})
-        else:
-            return jsonify({'error': e})
+    # Handle the POST request for signup
+    if request.method == 'POST':
+        username = request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        try:
+            db_add(username, email, password)  # Replace with your actual function to add to the database
+            return render_template('login.html')
+        except sqlite3.IntegrityError as e:
+            # Handle unique constraint errors specifically
+            if 'UNIQUE constraint failed: user_data.email' in str(e):
+                error = 'Email is already in use!'
+            elif 'UNIQUE constraint failed: user_data.username' in str(e):
+                error = 'Username is already in use!'
+            else:
+                error = 'An unexpected error occurred!'
+            return render_template('signup.html', error=error)
+            
+
+        except TypeError:
+            # Render the signup page again with a generic error message
+            return render_template('signup.html', error='An unexpected error occurred!')
+
+    # Handle the GET request to show the signup page
+    return render_template('signup.html')
 
 
 if __name__ == '__main__':
