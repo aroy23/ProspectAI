@@ -6,7 +6,7 @@ app = Flask(__name__,
             static_folder="../frontend/assets/css",
             template_folder="../frontend/assets/js")
 
-UPLOAD_FOLDER = './uploads'  # Adjust this path as needed
+UPLOAD_FOLDER = './uploads'
 ALLOWED_EXTENSIONS = {'mp4', 'avi', 'mov', 'mkv'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -16,7 +16,7 @@ def allowed_file(filename):
 
 @app.route('/')
 def home():
-    return render_template("index.html")
+    return render_template("login.html")
 
 @app.route('/add_user')
 def add_user(username, email, password):
@@ -34,9 +34,12 @@ def login(username, password):
         return db_login(username, password)
     except TypeError as e:
         return jsonify({'error': 'Enter both email and password!'})
+    
+@app.route('/analyze', methods=['GET', 'POST'])
+def analyze():
+    return 0
 
 if __name__ == '__main__':
-    # Create upload folder if it doesn't exist
     if not os.path.exists(UPLOAD_FOLDER):
         os.makedirs(UPLOAD_FOLDER)
     
