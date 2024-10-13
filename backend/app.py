@@ -1,12 +1,14 @@
 from flask import Flask, render_template, request, jsonify
 from logins import *
 import os
+from main import main
+import time
 
 app = Flask(__name__, 
             static_folder="../frontend/static",
             template_folder="../frontend/templates")
 
-UPLOAD_FOLDER = './uploads'
+UPLOAD_FOLDER = './input_videos'
 ALLOWED_EXTENSIONS = {'mp4', 'avi', 'mov', 'mkv'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -18,15 +20,46 @@ def allowed_file(filename):
 def home():
     return render_template("index.html")
 
-# @app.route('/add_user')
-# def add_user(username, email, password):
-#     try:
-#         db_add(username, email, password)
-#     except sqlite3.IntegrityError as e:
-#         if e == 'UNIQUE constraint failed: user_data.username':
-#             return jsonify({'error': 'Username already in use!'})
-#         elif e == 'UNIQUE constraint failed: user_data.email':
-#             return jsonify({'error': 'Email already in use!'})
+def clear_upload_folder():
+    folder = app.config['UPLOAD_FOLDER']
+    
+    # Check if the folder exists
+    if os.path.exists(folder):
+        # Remove all files in the directory
+        for filename in os.listdir(folder):
+            file_path = os.path.join(folder, filename)
+            try:
+                if os.path.isfile(file_path):
+                    os.remove(file_path)  # Remove the file
+            except Exception as e:
+                print(f"Error removing file {file_path}: {e}")
+
+
+@app.route('/upload_video', methods=['POST'])
+def upload_video():
+    clear_upload_folder()
+    # Check if the post request has the file part
+    if 'video' not in request.files:
+        return jsonify({'error': 'No file part in the request'})
+    
+    file = request.files['video']
+    
+    # If no file is selected
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'})
+    
+    # Check if the file is allowed
+    if file and allowed_file(file.filename):
+        # Secure the filename and save it to the UPLOAD_FOLDER
+        filename = file.filename
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(file_path)
+        tracknum = request.form.get('playerNumber')
+        main(int(tracknum))
+        return render_template('homepage2.html')
+    
+    
+    return jsonify({'error': 'Invalid file type'})
 
 @app.route('/login_page', methods=['GET'])
 def login_page():
@@ -64,9 +97,6 @@ def signup():
         else:
             return jsonify({'error': e})
 
-@app.route('/analyze', methods=['GET', 'POST'])
-def analyze():
-    return 0
 
 if __name__ == '__main__':
     if not os.path.exists(UPLOAD_FOLDER):

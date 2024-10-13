@@ -7,13 +7,13 @@ import os
 class VideoAudioGenerator:
     def __init__(self, video_path, audio_dir, output_video_dir, api_key_env_var="ELEVENLABS_API_KEY"):
         load_dotenv()
-        self.api_key = os.getenv(api_key_env_var)
+        self.api_key = 'sk_0b57e94b84e4c19a5e06bae8943f4e6480adc8c6e1f22c06'
         self.client = ElevenLabs(api_key=self.api_key)
         self.video_path = video_path
         self.audio_dir = audio_dir
         self.output_video_dir = output_video_dir
 
-    def generate_video_with_audio(self, text, voice="Rachel", model="eleven_monolingual_v1", video_speed_factor=0.70, audio_speed_factor=1.25):
+    def generate_video_with_audio(self, text, voice="Brian", model="eleven_monolingual_v1", video_speed_factor=0.70, audio_speed_factor=1.25):
         # Paths for audio and final video output
         audio_path = os.path.join(self.audio_dir, "my-file.mp3")
         final_video_path = os.path.join(self.output_video_dir, "video_with_audio.mp4")

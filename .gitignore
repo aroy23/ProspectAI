@@ -11,3 +11,4 @@ env
 backend/aud
 backend/vid
 backend/logins.db
+backend/comments

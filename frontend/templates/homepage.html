@@ -165,13 +165,15 @@
 <body>
     <header>
         <img src="../static/images/logo.png" style="width: 400px; height: auto;">
-        <button class="sign-out-button">Sign Out</button>
+        <a href="{{ url_for('login_page') }}" style="margin-top: 20px;">
+            <button class="sign-out-button">Sign Out</button>
+        </a>
     </header>
 
     <div class="container">
         <div class="left-panel">
             <div class="profile-pic" id="profilePicture">
-                <img src="default.png" alt="Profile Picture" />
+                <img src="../static/images/default.jpg" alt="Profile Picture" />
             </div>
             <p><strong>Name:</strong> <span id="name">JohnDoe</span></p>
             <p><strong>Sport:</strong> <span id="sport">Basketball</span></p>
@@ -187,18 +189,25 @@
         <div class="main-content">
             <h2>Upload Your Highlight Video</h2>
             <div class="upload-section">
-                <label for="videoUpload">Choose video to upload:</label>
-                <input type="file" id="videoUpload" accept="video/*">
-                <button type="button" onclick="uploadVideo()">Upload Video</button>
+                <form id="uploadForm" method="POST" action="/upload_video" enctype="multipart/form-data">
+                    <label for="playerNumber">Enter Tracking Player Number:</label>
+                    <input type="number" id="playerNumber" name="playerNumber" min="0" required>
+                    
+                    <label for="videoUpload">Choose video to upload:</label>
+                    <input type="file" id="videoUpload" name="video" accept="video/*" required>
+                    
+                    <button type="submit">Upload Video</button>
+                </form>
             </div>
         </div>
-
+        
+        
         <!-- College selection panel -->
         <div class="right-panel">
             <h3>Select College</h3>
             <h4>Use the search function to list colleges you're interested in!</h4>
             <div class="search-college">
-                <select id="collegeSelect" onchange="showCollegeInfo()">
+                <select id="collegeSelect">
                     <option value="" disabled selected>Select a college</option>
                     <option value="College 1">College 1</option>
                     <option value="College 2">College 2</option>
@@ -288,22 +297,6 @@
             }
         }
 
-        function uploadVideo() {
-            const videoUpload = document.getElementById('videoUpload');
-            const videoPreview = document.getElementById('videoPreview');
-
-            if (videoUpload.files.length > 0) {
-                const videoFile = videoUpload.files[0];
-                const videoElement = document.createElement('video');
-                videoElement.src = URL.createObjectURL(videoFile);
-                videoElement.controls = true; // Add controls to the video
-                videoPreview.innerHTML = ''; // Clear any existing video
-                videoPreview.appendChild(videoElement); // Append the new video
-            } else {
-                alert('Please select a video file to upload.');
-            }
-        }
-
         function saveChanges() {
             const name = document.getElementById('editName').value;
             const sport = document.getElementById('editSport').value;
@@ -335,7 +328,20 @@
 
         function addCollege() {
             const collegeSelect = document.getElementById('collegeSelect');
-            collegeSelect.selectedIndex = 0; // Reset selection
+            const selectedCollege = collegeSelect.value;
+
+            if (selectedCollege) {
+                const collegeInfo = document.createElement('div');
+                collegeInfo.className = 'college-link';
+                collegeInfo.innerHTML = `<span class="college-name">${selectedCollege}</span>
+                <button onclick="removeCollege(this)">Remove</button>`;
+                document.getElementById('myColleges').appendChild(collegeInfo);
+
+                // Reset the dropdown selection
+                collegeSelect.selectedIndex = 0;
+            } else {
+                alert("Please select a college.");
+            }
         }
 
         function removeCollege(button) {
