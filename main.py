@@ -74,7 +74,7 @@ def main():
 
     # Draw output 
     ## Draw object Tracks
-    output_video_frames = tracker.draw_annotations(video_frames, tracks, team_ball_control)
+    output_video_frames = tracker.draw_annotations(video_frames, tracks, team_ball_control, 6)
 
     # Save video
     save_video(output_video_frames, 'output_videos/output_video.mp4')
@@ -106,7 +106,6 @@ def main():
     
     play_by_play_string = generator.load_play_by_play('commentary.txt')
     commentary = generator.generate_commentary(play_by_play_string)
-    print(commentary)
 
     video_generator = VideoAudioGenerator(
     video_path="./output_videos/output_video.mp4", 

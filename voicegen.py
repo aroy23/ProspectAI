@@ -13,7 +13,7 @@ class VideoAudioGenerator:
         self.audio_dir = audio_dir
         self.output_video_dir = output_video_dir
 
-    def generate_video_with_audio(self, text, voice="Rachel", model="eleven_monolingual_v1", video_speed_factor=0.65, audio_speed_factor=1.25):
+    def generate_video_with_audio(self, text, voice="Rachel", model="eleven_monolingual_v1", video_speed_factor=0.70, audio_speed_factor=1.25):
         # Paths for audio and final video output
         audio_path = os.path.join(self.audio_dir, "my-file.mp3")
         final_video_path = os.path.join(self.output_video_dir, "video_with_audio.mp4")

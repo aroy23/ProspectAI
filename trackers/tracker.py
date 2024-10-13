@@ -191,10 +191,9 @@ class Tracker:
 
         return frame
 
-    def draw_annotations(self, video_frames, tracks, team_ball_control):
+    def draw_annotations(self, video_frames, tracks, team_ball_control, myplayer):
         # Draw annotations on video frames
         output_video_frames = []
-        myplayer = 6
         for frame_num, frame in enumerate(video_frames):
             frame = frame.copy()
 
