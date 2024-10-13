@@ -16,7 +16,7 @@ def allowed_file(filename):
 
 @app.route('/')
 def home():
-    return render_template("login.html")
+    return render_template("index.html")
 
 @app.route('/add_user')
 def add_user(username, email, password):
