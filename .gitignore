@@ -1,13 +1,13 @@
 *__pycache__*
 *.pyc
 models/
-input_videos/
-output_videos/
+backend/input_videos/
+backend/output_videos/
 .env
 .venv/
 .DS_STORE
 .venv
 env
-aud
-vid
+backend/aud
+backend/vid
 backend/logins.db

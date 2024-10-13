@@ -13,14 +13,14 @@ from voicegen import VideoAudioGenerator
 
 def main():
     # Read Video
-    video_frames = read_video('input_videos/test.mp4')
+    video_frames = read_video('./input_videos/test.mp4')
 
     # Initialize Tracker
-    tracker = Tracker('models/best.pt')
+    tracker = Tracker('./models/best.pt')
 
     tracks = tracker.get_object_tracks(video_frames,
                                        read_from_stub=True,
-                                       stub_path='stubs/track_stubs.pkl')
+                                       stub_path='./stubs/track_stubs.pkl')
     # Get object positions 
     tracker.add_position_to_tracks(tracks)
 
@@ -28,7 +28,7 @@ def main():
     camera_movement_estimator = CameraMovementEstimator(video_frames[0])
     camera_movement_per_frame = camera_movement_estimator.get_camera_movement(video_frames,
                                                                                 read_from_stub=True,
-                                                                                stub_path='stubs/camera_movement_stub.pkl')
+                                                                                stub_path='./stubs/camera_movement_stub.pkl')
     camera_movement_estimator.add_adjust_positions_to_tracks(tracks,camera_movement_per_frame)
 
 
@@ -77,7 +77,7 @@ def main():
     output_video_frames = tracker.draw_annotations(video_frames, tracks, team_ball_control, 6)
 
     # Save video
-    save_video(output_video_frames, 'output_videos/output_video.mp4')
+    save_video(output_video_frames, './output_videos/output_video.mp4')
     generator = SoccerCommentaryGenerator()
 
     # Define the new lines you want to add
@@ -90,7 +90,7 @@ def main():
     ]
 
     # Specify the file path
-    file_path = 'commentary.txt'
+    file_path = './commentary.txt'
 
     # Read the content of the file
     with open(file_path, 'r') as file:
@@ -104,7 +104,7 @@ def main():
         file.writelines(lines)
 
     
-    play_by_play_string = generator.load_play_by_play('commentary.txt')
+    play_by_play_string = generator.load_play_by_play('./commentary.txt')
     commentary = generator.generate_commentary(play_by_play_string)
 
     video_generator = VideoAudioGenerator(
