@@ -2,26 +2,31 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 
-# URL of the webpage containing the list of colleges and their athletic websites
-url = 'https://www.ncaa.com/schools'  # Replace this with the actual URL you're scraping from
+# Base URL for pagination (replace 'page_num' with the actual URL structure)
+base_url = 'https://example-college-sports-list.com/page/'  # Replace with actual base URL
 
-# Send a request to the webpage
-response = requests.get(url)
-soup = BeautifulSoup(response.text, 'html.parser')
-
-# Empty lists to hold the scraped data
+# Initialize empty lists to store college names and website links
 colleges = []
 links = []
 
-# Example: Scraping data from a table
-for row in soup.find_all('tr'):  # Assuming each college is listed in a table row
-    columns = row.find_all('td')
-    if len(columns) > 1:
-        college_name = columns[0].text.strip()
-        athletic_link = columns[1].find('a')['href']
-        
-        colleges.append(college_name)
-        links.append(athletic_link)
+# Loop through multiple pages (adjust range according to number of pages)
+for page_num in range(1, 5):  # Replace 5 with the total number of pages
+    url = f'{base_url}{page_num}'
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    
+    # Adjust this part based on how the table is structured
+    for row in soup.find_all('tr'):  # Assuming each college is listed in a table row
+        columns = row.find_all('td')
+        if len(columns) > 1:
+            college_name = columns[0].find('a').text.strip()  # Extract the college name
+            athletic_link = columns[0].find('a')['href']  # Extract the link
+            
+            # Add 'https://example-college-sports-list.com' to complete relative URLs
+            athletic_link = 'https://example-college-sports-list.com' + athletic_link
+            
+            colleges.append(college_name)
+            links.append(athletic_link)
 
 # Create a DataFrame with the scraped data
 df = pd.DataFrame({
