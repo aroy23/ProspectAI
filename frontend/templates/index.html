@@ -12,8 +12,12 @@
         <h1>Welcome to Your Dashboard!</h1>
         <p>This is your personal space to manage everything.</p>
         <!-- Use Flask's url_for to link to the login and signup routes -->
-        <button onclick="location.href='{{ url_for('login') }}'" style="margin-top: 20px;">Log In</button>
-        <button onclick="location.href='{{ url_for('signup') }}'" style="margin-top: 10px;">Sign Up</button>
+        <a href="{{ url_for('login_page') }}" style="margin-top: 20px;">
+            <button>Log In</button>
+        </a>
+        <a href="{{ url_for('add_user') }}" style="margin-top: 10px;">
+            <button>Sign Up</button>
+        </a>
     </div>
 </body>
 </html>

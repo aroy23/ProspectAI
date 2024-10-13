@@ -8,13 +8,13 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href=../static/css/styles.css>
     <title>Log In</title>
 </head>
 <body>
     <div class="container">
         <!-- Logo image above the form -->
-        <img src="images/logo.png" alt="Logo" class="logo">
+        <img src="../static/images/logo.png" alt="Logo" class="logo">
         <h1>Log In</h1>
         <div id="login-error-message" style="color: red; display: none;"></div>
         <form id="login-form" action="{{ url_for('login') }}" method="POST">
