@@ -3,8 +3,8 @@ from logins import *
 import os
 
 app = Flask(__name__, 
-            static_folder="../frontend/assets/css",
-            template_folder="../frontend/assets/js")
+            static_folder="../frontend/static",
+            template_folder="../frontend/templates")
 
 UPLOAD_FOLDER = './uploads'
 ALLOWED_EXTENSIONS = {'mp4', 'avi', 'mov', 'mkv'}
@@ -28,7 +28,11 @@ def add_user(username, email, password):
         elif e == 'UNIQUE constraint failed: user_data.email':
             return jsonify({'error': 'Email already in use!'})
 
-@app.route('/login')
+@app.route('/login_page', methods=['GET'])
+def login_page():
+    return render_template('login.html')
+
+@app.route('/login', methods=['GET', 'POST'])
 def login(username, password):
     try:
         return db_login(username, password)

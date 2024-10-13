@@ -21,7 +21,7 @@ body {
     font-family: "Afacad Flux", sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('images/sports.jpg'); /* Path to sports.avif */
+    background-image: url('../images/sports.jpg'); /* Path to sports.avif */
     background-size: cover; /* Cover the entire viewport */
     background-position: center; /* Center the background image */
     background-repeat: no-repeat; /* Prevent repetition */
